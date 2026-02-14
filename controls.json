@@ -1,0 +1,128 @@
+[
+  {
+    "tag": "A",
+    "text": "",
+    "class": "text-decoration-none d-flex align-items-center d-none d-xl-flex icon44px",
+    "id": "",
+    "href": "https://www.bobswatches.com/usa"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "text-decoration-none d-flex align-items-center d-flex d-xl-none",
+    "id": "right-contents-cart-icon",
+    "href": "https://www.bobswatches.com/cart"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": "https://www.bobswatches.com/"
+  },
+  {
+    "tag": "DIV",
+    "text": "",
+    "class": "d-inline-flex d-xl-none align-items-center white-tooltip",
+    "id": "authenticatedTimepieces",
+    "href": null
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "text-decoration-none d-flex align-items-center d-none d-xl-flex icon44px",
+    "id": "",
+    "href": "https://www.bobswatches.com/cart"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "text-decoration-none d-flex align-items-center icon44px",
+    "id": "account-link",
+    "href": "https://www.bobswatches.com/verify_login?account_login=1"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "mobile-icon-nav-wrapper py-4 px-3",
+    "id": "",
+    "href": "https://www.bobswatches.com/"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": "https://www.bobswatches.com/"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": null
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": null
+  },
+  {
+    "tag": "A",
+    "text": "2",
+    "class": "pageNavBtn",
+    "id": "",
+    "href": "https://www.bobswatches.com/omega/?page=2"
+  },
+  {
+    "tag": "A",
+    "text": "3",
+    "class": "pageNavBtn lastPage ",
+    "id": "",
+    "href": "https://www.bobswatches.com/omega/?page=3"
+  },
+  {
+    "tag": "A",
+    "text": "Next Page",
+    "class": "pageNextBtn ",
+    "id": "",
+    "href": "https://www.bobswatches.com/omega/?page=2"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": "https://twitter.com/BobsWatches"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": "https://www.facebook.com/bobswatches/"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": "https://www.instagram.com/bobswatches/"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "mx-2",
+    "id": "",
+    "href": "https://www.youtube.com/@bobswatches"
+  },
+  {
+    "tag": "A",
+    "text": "",
+    "class": "",
+    "id": "",
+    "href": "https://www.tiktok.com/@bobswatchesofficial"
+  }
+]

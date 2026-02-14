@@ -1,0 +1,27 @@
+Total: 247
+By Brand: [
+  {
+    "brand": "Rolex",
+    "count": "90"
+  },
+  {
+    "brand": "Tudor",
+    "count": "45"
+  },
+  {
+    "brand": "Patek Philippe",
+    "count": "17"
+  },
+  {
+    "brand": "Omega",
+    "count": "45"
+  },
+  {
+    "brand": "Audemars Piguet",
+    "count": "15"
+  },
+  {
+    "brand": "Cartier",
+    "count": "35"
+  }
+]
