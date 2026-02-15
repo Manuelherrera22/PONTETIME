@@ -95,31 +95,17 @@ const ProductDetail = () => {
 
                         <div className="flex space-x-4">
                             <button
-                                onClick={handleAddToCart}
-                                className={`flex-1 ${added ? 'bg-green-600' : 'bg-luxury-black'} text-white py-4 font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors flex items-center justify-center`}
+                                disabled
+                                className="flex-1 bg-gray-200 text-gray-500 py-4 font-bold uppercase tracking-widest cursor-not-allowed flex items-center justify-center"
                             >
-                                {added ? (
-                                    <>
-                                        <Check size={20} className="mr-2" /> View in Bag
-                                    </>
-                                ) : (
-                                    <>
-                                        <ShoppingBag size={20} className="mr-2" /> Add to Bag
-                                    </>
-                                )}
+                                <ShoppingBag size={20} className="mr-2" /> Online Shop Coming Soon
                             </button>
-                            {added ? (
-                                <Link
-                                    to="/cart"
-                                    className="flex-1 bg-luxury-gold text-white py-4 font-bold uppercase tracking-widest hover:bg-amber-600 transition-colors flex items-center justify-center animate-in fade-in zoom-in duration-300"
-                                >
-                                    Go to Checkout
-                                </Link>
-                            ) : (
-                                <button className="flex-1 border border-luxury-black text-luxury-black py-4 font-bold uppercase tracking-widest hover:bg-luxury-black hover:text-white transition-colors">
-                                    Contact Us
-                                </button>
-                            )}
+                            <Link
+                                to="/services"
+                                className="flex-1 border border-luxury-black text-luxury-black py-4 font-bold uppercase tracking-widest hover:bg-luxury-black hover:text-white transition-colors flex items-center justify-center"
+                            >
+                                Service This Watch
+                            </Link>
                         </div>
 
                         {/* Value Props */}

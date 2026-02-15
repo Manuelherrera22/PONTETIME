@@ -1,98 +1,51 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
-import { useState, useEffect } from 'react';
 
 const ProductCard = ({ product }) => {
-    const { user } = useAuth();
-    const navigate = useNavigate();
-    const [isWishlisted, setIsWishlisted] = useState(false);
-
-    useEffect(() => {
-        if (user) {
-            checkWishlist();
-        }
-    }, [user, product.id]);
-
-    const checkWishlist = async () => {
-        const { data } = await supabase
-            .from('wishlist')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('watch_id', product.id)
-            .maybeSingle(); // Use maybeSingle to avoid 406 error if multiple found (though unique constraint exists)
-
-        setIsWishlisted(!!data);
-    };
-
-    const toggleWishlist = async (e) => {
-        e.preventDefault(); // Prevent navigating to product page
-        e.stopPropagation();
-
-        if (!user) {
-            navigate('/login');
-            return;
-        }
-
-        if (isWishlisted) {
-            await supabase
-                .from('wishlist')
-                .delete()
-                .eq('user_id', user.id)
-                .eq('watch_id', product.id);
-            setIsWishlisted(false);
-        } else {
-            await supabase
-                .from('wishlist')
-                .insert([{ user_id: user.id, watch_id: product.id }]);
-            setIsWishlisted(true);
-        }
-    };
+    // Coming Soon / Próximamente Mode
+    // Locked interaction, blurred image, hidden price.
 
     return (
-        <Link to={`/product/${product.id}`} className="group block h-full">
-            <motion.div
-                whileHover={{ y: -5 }}
-                className="bg-white border border-gray-100 rounded-sm overflow-hidden h-full flex flex-col relative shadow-sm hover:shadow-md transition-shadow duration-300"
+        <div className="group block h-full select-none cursor-default">
+            <div
+                className="bg-white border border-gray-100 rounded-sm overflow-hidden h-full flex flex-col relative shadow-sm"
             >
-                {/* Wishlist Button */}
-                <button
-                    onClick={toggleWishlist}
-                    className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm transition-all shadow-sm group/heart"
-                >
-                    <Heart size={18} fill={isWishlisted ? "currentColor" : "none"} className={isWishlisted ? "text-red-500" : ""} />
-                </button>
-
                 <div className="relative aspect-[4/5] overflow-hidden bg-gray-50">
-                    <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                        loading="lazy"
-                    />
-                    {product.isNew && (
-                        <div className="absolute top-3 left-3 bg-luxury-black text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">
-                            New Arrival
+                    {product.image ? (
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover filter blur-[4px] opacity-80"
+                            loading="lazy"
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gray-100/50">
                         </div>
                     )}
+
+                    {/* Coming Soon Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center z-10 p-4">
+                        <div className="bg-white/90 backdrop-blur-sm px-4 py-2 shadow-sm border border-gray-100">
+                            <span className="text-luxury-black text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
+                                Próximamente
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="p-6 flex-grow flex flex-col justify-between relative bg-white transition-colors duration-300 group-hover:bg-gray-50">
+                <div className="p-4 md:p-6 flex-grow flex flex-col justify-between relative bg-white">
                     <div>
-                        <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">{product.brand}</p>
-                        <h3 className="font-serif text-lg text-luxury-black mb-2 leading-tight group-hover:text-luxury-gold transition-colors">{product.name}</h3>
-                        <p className="text-gray-500 text-sm mb-4 line-clamp-2">{product.description}</p>
+                        <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">{product.brand}</p>
+                        <h3 className="font-serif text-base md:text-lg text-gray-400 mb-2 leading-tight blur-[1px] select-none">{product.name}</h3>
                     </div>
 
-                    <div className="flex justify-between items-center mt-auto">
-                        <span className="font-bold text-luxury-black text-lg">{product.price}</span>
-                        <span className="text-xs text-luxury-gold uppercase tracking-widest hover:underline">View Details</span>
+                    <div className="mt-auto pt-4 border-t border-dashed border-gray-100">
+                        <span className="text-xs text-luxury-gold uppercase tracking-widest font-bold">
+                            Disponible Pronto
+                        </span>
                     </div>
                 </div>
-            </motion.div>
-        </Link>
+            </div>
+        </div>
     );
 };
 

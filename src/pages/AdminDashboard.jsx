@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
-import { Plus, Edit, Trash2, Search, LogOut } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, LogOut, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -61,6 +61,12 @@ const AdminDashboard = () => {
                         <p className="text-gray-500">Welcome, {user?.email}</p>
                     </div>
                     <div className="flex gap-4">
+                        <Link
+                            to="/admin/repairs"
+                            className="bg-luxury-black text-white px-6 py-2 rounded-full flex items-center hover:bg-gray-800 transition-colors"
+                        >
+                            <Wrench size={18} className="mr-2" /> Service Requests
+                        </Link>
                         <Link
                             to="/admin/new"
                             className="bg-luxury-gold text-white px-6 py-2 rounded-full flex items-center hover:bg-yellow-600 transition-colors"

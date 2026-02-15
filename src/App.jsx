@@ -11,6 +11,7 @@ import ServicesPage from './pages/ServicesPage'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminRepairs from './pages/AdminRepairs';
 import AdminWatchForm from './pages/AdminWatchForm';
 import Wishlist from './pages/Wishlist';
 import CartPage from './pages/CartPage';
@@ -19,17 +20,20 @@ import ScrollToTop from './components/ScrollToTop';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookieBanner from './components/CookieBanner';
 import AdminRoute from './components/AdminRoute';
+import RepairRequest from './pages/RepairRequest';
+import TrackRepair from './pages/TrackRepair';
 
 function App() {
   const location = useLocation();
 
   return (
-    <div className="flex flex-col min-h-screen bg-luxury-black text-white font-sans selection:bg-luxury-gold selection:text-black">
+    <div className="flex flex-col min-h-screen bg-white text-luxury-black font-sans selection:bg-luxury-gold selection:text-white">
       <ScrollToTop />
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<ServicesPage />} />
+          <Route path="/home" element={<Home />} /> {/* Kept as accessible route if needed, or could redirect */}
           <Route path="/shop" element={<Shop />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/product/:id" element={<ProductDetail />} />
@@ -71,6 +75,16 @@ function App() {
               </AdminRoute>
             }
           />
+          <Route
+            path="/admin/repairs"
+            element={
+              <AdminRoute>
+                <AdminRepairs />
+              </AdminRoute>
+            }
+          />
+          <Route path="/repair-request" element={<RepairRequest />} />
+          <Route path="/track-repair" element={<TrackRepair />} />
 
         </Routes>
       </AnimatePresence>

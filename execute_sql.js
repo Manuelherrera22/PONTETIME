@@ -40,7 +40,6 @@ const connectionString =
 
 if (!connectionString) {
     console.error('No database connection string found in .env.local (SUPABASE_DB_URL, DATABASE_URL, or VITE_SUPABASE_DB_URL).');
-    // Debug: Print keys to see what we actually have (safe)
     console.log('Available Env Keys:', Object.keys(process.env).filter(k => k.includes('SUPABASE')));
     process.exit(1);
 }

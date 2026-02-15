@@ -1,12 +1,10 @@
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import ProductCard from '../components/ProductCard';
 import { Filter, X, ChevronDown, Check } from 'lucide-react';
-import { useSearchParams, useLocation } from 'react-router-dom';
-import ProductGridSection from '../components/ProductGridSection';
+import { useSearchParams } from 'react-router-dom';
 import SEO from '../components/SEO';
-
 import SkeletonCard from '../components/SkeletonCard';
 
 const Shop = () => {
@@ -108,28 +106,26 @@ const Shop = () => {
         );
     };
 
-    // Client-side filtering is no longer needed/used for display, but we keep the UI logic
-    // We display `products` directly now.
     const displayProducts = products;
 
-    if (loading) {
+    if (loading && page === 0) {
         return (
-            <section className="min-h-screen bg-white text-luxury-black pt-24 pb-12">
+            <section className="min-h-screen bg-white text-luxury-black pt-32 pb-12">
                 <div className="container mx-auto px-6">
-                    <div className="flex flex-col md:flex-row gap-8">
+                    <div className="flex flex-col md:flex-row gap-12">
                         {/* Skeleton Sidebar */}
-                        <aside className="hidden md:block w-64 flex-shrink-0">
-                            <div className="bg-white border border-gray-100 p-6 rounded-lg space-y-8 animate-pulse shadow-sm">
-                                <div className="h-4 w-32 bg-gray-200 rounded" />
-                                <div className="space-y-3">
-                                    {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-4 w-full bg-gray-200 rounded" />)}
+                        <aside className="hidden md:block w-56 flex-shrink-0 pt-2">
+                            <div className="space-y-8 animate-pulse">
+                                <div className="h-4 w-24 bg-gray-100 rounded" />
+                                <div className="space-y-4">
+                                    {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="h-4 w-full bg-gray-50 rounded" />)}
                                 </div>
                             </div>
                         </aside>
 
                         {/* Skeleton Grid */}
-                        <div className="flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => <SkeletonCard key={i} />)}
+                        <div className="flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                            {[1, 2, 3, 4, 5, 6, 7, 8].map(i => <SkeletonCard key={i} />)}
                         </div>
                     </div>
                 </div>
@@ -138,7 +134,7 @@ const Shop = () => {
     }
 
     return (
-        <section className="min-h-screen bg-white text-luxury-black pt-32 md:pt-40 pb-12">
+        <section className="min-h-screen bg-white text-luxury-black pt-32 md:pt-40 pb-20">
             <SEO
                 title="Shop Luxury Watches | Full Collection"
                 description="Browse our complete inventory of Rolex, Omega, Patek Philippe, and more. Filter by brand and price to find your perfect timepiece."
@@ -146,75 +142,71 @@ const Shop = () => {
             <div className="container mx-auto px-6">
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-200 pb-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-4">
-                        <div>
-                            <h1 className="text-4xl md:text-5xl font-serif mb-2 text-luxury-black">The Collection</h1>
-                            <div className="flex justify-between items-center mb-6">
-                                <p className="text-gray-500 text-sm">
-                                    Showing {products.length} results
-                                </p>
-                                <div className="flex items-center space-x-2">
-                                    <span className="text-sm text-gray-500">Sort by:</span>
-                                    <div className="relative">
-                                        <select
-                                            className="appearance-none bg-white border border-gray-200 text-gray-700 py-2 pl-4 pr-8 text-sm focus:outline-none focus:border-luxury-gold"
-                                            onChange={(e) => setSortBy(e.target.value)}
-                                            defaultValue={sortBy}
-                                        >
-                                            <option value="newest">Newest Arrivals</option>
-                                            <option value="price_asc">Price: Low to High</option>
-                                            <option value="price_desc">Price: High to Low</option>
-                                        </select>
-                                        <ChevronDown size={14} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-gray-100 pb-8">
+                    <div>
+                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">Inventory</h4>
+                        <h1 className="text-4xl md:text-5xl font-serif text-luxury-black">The Collection</h1>
                     </div>
 
-                    <button
-                        onClick={() => setIsFilterOpen(!isFilterOpen)}
-                        className="mt-4 md:mt-0 flex items-center gap-2 text-luxury-gold border border-luxury-gold px-4 py-2 hover:bg-luxury-gold hover:text-white transition-colors md:hidden"
-                    >
-                        <Filter size={18} /> Filters
-                    </button>
+                    <div className="flex flex-col md:flex-row items-end md:items-center gap-6 mt-6 md:mt-0">
+                        <p className="text-xs text-gray-400 font-medium tracking-wide">
+                            {products.length} Timepieces
+                        </p>
+
+                        <div className="relative group">
+                            <select
+                                className="appearance-none bg-transparent border-none text-xs font-bold uppercase tracking-widest text-luxury-black py-2 pr-8 focus:outline-none cursor-pointer"
+                                onChange={(e) => setSortBy(e.target.value)}
+                                defaultValue={sortBy}
+                            >
+                                <option value="newest">Newest Arrivals</option>
+                                <option value="price_asc">Price: Low to High</option>
+                                <option value="price_desc">Price: High to Low</option>
+                            </select>
+                            <ChevronDown size={12} className="absolute right-0 top-1/2 transform -translate-y-1/2 text-luxury-black pointer-events-none" />
+                        </div>
+
+                        <button
+                            onClick={() => setIsFilterOpen(!isFilterOpen)}
+                            className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-luxury-black md:hidden"
+                        >
+                            <Filter size={14} /> Filter
+                        </button>
+                    </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex flex-col md:flex-row gap-12 relative">
 
                     {/* Sidebar Filters */}
-                    <aside className={`md: w - 64 flex - shrink - 0 ${isFilterOpen ? 'block' : 'hidden md:block'} `}>
-                        <div className="bg-white border border-gray-100 shadow-sm p-6 rounded-lg sticky top-24">
-                            <div className="flex justify-between items-center mb-6 md:hidden">
+                    <aside className={`md:w-56 flex-shrink-0 ${isFilterOpen ? 'block' : 'hidden md:block'}`}>
+                        <div className="sticky top-32">
+                            <div className="flex justify-between items-center mb-8 md:hidden">
                                 <h3 className="font-serif text-xl">Filters</h3>
                                 <button onClick={() => setIsFilterOpen(false)}><X size={20} /></button>
                             </div>
 
                             {/* Brand Filter */}
-                            <div className="mb-8">
-                                <h3 className="font-serif text-lg mb-4">Brands</h3>
-                                <div className="space-y-2">
+                            <div className="mb-10">
+                                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-luxury-gold mb-6">Brands</h3>
+                                <div className="space-y-3">
                                     {AVAILABLE_BRANDS.map((brand) => (
                                         <label key={brand} className="flex items-center space-x-3 cursor-pointer group" onClick={() => toggleBrand(brand)}>
-                                            <div className={`w - 5 h - 5 border flex items - center justify - center transition - colors ${selectedBrands.includes(brand) ? 'bg-luxury-black border-luxury-black mb-1' : 'border-gray-300 group-hover:border-luxury-gold'
-                                                } `}>
-                                                {selectedBrands.includes(brand) && <Check size={12} className="text-white" />}
+                                            <div className={`w-4 h-4 border flex items-center justify-center transition-all duration-300 ${selectedBrands.includes(brand) ? 'bg-luxury-black border-luxury-black' : 'border-gray-200 group-hover:border-gray-400'
+                                                }`}>
+                                                {selectedBrands.includes(brand) && <Check size={10} className="text-white" />}
                                             </div>
-                                            <span className="text-gray-600 group-hover:text-luxury-black transition-colors">{brand}</span>
+                                            <span className={`text-xs uppercase tracking-wider transition-colors ${selectedBrands.includes(brand) ? 'text-luxury-black font-bold' : 'text-gray-500 group-hover:text-luxury-black'}`}>
+                                                {brand}
+                                            </span>
                                         </label>
                                     ))}
                                 </div>
                             </div>
 
-                            {/* Price Filter (Simple Range for now) */}
+                            {/* Price Filter */}
                             <div>
-                                <h3 className="text-luxury-gold font-bold uppercase tracking-widest text-xs mb-4">Price Range</h3>
+                                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-luxury-gold mb-6">Price Range</h3>
                                 <div className="space-y-4">
-                                    <div className="flex justify-between text-xs text-gray-500">
-                                        <span>$0</span>
-                                        <span>$100k+</span>
-                                    </div>
                                     <input
                                         type="range"
                                         min="0"
@@ -222,10 +214,13 @@ const Shop = () => {
                                         step="1000"
                                         value={priceRange[1]}
                                         onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                                        className="w-full accent-luxury-gold h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                        className="w-full h-0.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-luxury-black"
                                     />
-                                    <div className="text-center text-sm font-bold text-luxury-black">
-                                        Up to ${priceRange[1].toLocaleString()}
+                                    <div className="flex justify-between text-xs text-gray-500 font-medium">
+                                        <span>$0</span>
+                                        <span className="text-luxury-black font-bold max-w-[80px] text-right truncate">
+                                            ${priceRange[1].toLocaleString()}{priceRange[1] === 100000 ? '+' : ''}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -236,33 +231,31 @@ const Shop = () => {
                     <div className="flex-1">
                         {displayProducts.length > 0 ? (
                             <>
-                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
                                     {displayProducts.map((product) => (
                                         <ProductCard key={product.id} product={product} />
                                     ))}
                                 </div>
 
                                 {products.length < totalCount && (
-                                    <div className="mt-12 text-center">
+                                    <div className="mt-20 text-center">
                                         <button
                                             onClick={loadMore}
                                             disabled={loading}
-                                            className="px-8 py-3 bg-white border border-gray-300 text-luxury-black font-serif uppercase tracking-widest hover:bg-luxury-black hover:text-white transition-all disabled:opacity-50"
+                                            className="px-10 py-4 bg-transparent border border-gray-200 text-luxury-black text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-luxury-black hover:text-white hover:border-luxury-black transition-all duration-500 disabled:opacity-50"
                                         >
-                                            {loading ? 'Loading...' : 'Load More Timepieces'}
+                                            {loading ? 'Loading...' : 'View More'}
                                         </button>
-                                        <p className="mt-4 text-xs text-gray-400">
-                                            Showing {products.length} of {totalCount}
-                                        </p>
                                     </div>
                                 )}
                             </>
                         ) : (
-                            <div className="text-center py-20 text-gray-500">
-                                <p className="text-xl font-serif mb-2">No timepieces found.</p>
+                            <div className="flex flex-col items-center justify-center py-32 text-center">
+                                <p className="text-2xl font-serif text-luxury-black mb-4">No timepieces found</p>
+                                <p className="text-gray-400 text-sm mb-8">Try adjusting your filters or search criteria.</p>
                                 <button
                                     onClick={() => { setSelectedBrands([]); setPriceRange([0, 100000]) }}
-                                    className="text-luxury-gold hover:underline"
+                                    className="text-luxury-gold text-xs font-bold uppercase tracking-widest hover:text-black transition-colors border-b border-luxury-gold pb-1 hover:border-black"
                                 >
                                     Clear all filters
                                 </button>

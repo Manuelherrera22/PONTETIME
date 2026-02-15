@@ -4,17 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-luxury-black text-luxury-white font-sans;
-  }
+body {
+  @apply bg-white text-luxury-black font-sans antialiased;
+}
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-serif text-luxury-gold;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-serif;
+}
+
+/* Optional: Add a class for gold text if needed specifically */
+.text-gold {
+  @apply text-luxury-gold;
 }

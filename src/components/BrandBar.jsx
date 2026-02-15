@@ -7,18 +7,16 @@ const brands = [
 
 const BrandBar = () => {
     return (
-        <div className="bg-white border-b border-gray-100 py-6 sticky top-0 md:relative z-40">
+        <div className="bg-white border-b border-gray-100 py-4 md:py-6 overflow-hidden">
             <div className="container mx-auto px-6">
-                <div className="flex overflow-x-auto space-x-8 md:justify-center pb-2 md:pb-0 scrollbar-hide">
+                <div className="flex overflow-x-auto gap-8 md:gap-12 md:justify-center pb-2 md:pb-0 scrollbar-hide snap-x">
                     {brands.map((brand) => (
                         <Link
                             key={brand}
                             to={`/shop?brand=${brand}`}
-                            className="text-gray-500 hover:text-luxury-black font-serif text-sm whitespace-nowrap transition-colors flex items-center space-x-2"
+                            className="text-gray-400 hover:text-luxury-black text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap transition-colors flex-shrink-0 snap-start"
                         >
-                            {/* Placeholder for Logo - keeping it text for now as per plan */}
-                            <span className="w-2 h-2 rounded-full bg-gray-200"></span>
-                            <span>{brand}</span>
+                            {brand}
                         </Link>
                     ))}
                 </div>

@@ -68,26 +68,26 @@ const ProductGridSection = ({ title, brandFilter = null, limit = 6, bgColor = 'b
             <div className="container mx-auto px-6">
 
                 {/* Minimalist Header */}
-                <div className="mb-12 pl-4">
-                    <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">
-                        SHOP
+                <div className="mb-16 text-center">
+                    <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-4">
+                        Discover
                     </h4>
-                    <h2 className="text-4xl md:text-5xl font-serif text-luxury-black">
+                    <h2 className="text-3xl md:text-4xl font-serif text-luxury-black">
                         {title}
                     </h2>
                 </div>
 
                 {/* Elegant Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-12 mb-16">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-12 md:gap-x-6 md:gap-y-16 mb-20">
                     {products.map((product) => (
                         <ElegantProductCard key={product.id} product={product} />
                     ))}
                 </div>
 
                 {/* Pill Button */}
-                <div className="pl-4">
-                    <Link to="/shop" className="inline-block bg-black text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                        Show More Watches
+                <div className="text-center">
+                    <Link to="/shop" className="inline-block border border-gray-300 bg-transparent text-luxury-black px-8 py-3 md:px-10 md:py-4 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition-all duration-300">
+                        View All Watches
                     </Link>
                 </div>
             </div>
